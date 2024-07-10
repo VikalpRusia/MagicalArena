@@ -94,6 +94,7 @@ public class SimplePlayer implements Player {
         return attack;
     }
 
+    @Override
     public String getName() {
         return name;
     }

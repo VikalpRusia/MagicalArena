@@ -44,4 +44,11 @@ public interface Player {
      * @return the attack attribute of the player.
      */
     int getAttack();
+
+    /**
+     * Retrieves the name attribute of the player.
+     *
+     * @return the name attribute of the player.
+     */
+    String getName();
 }
