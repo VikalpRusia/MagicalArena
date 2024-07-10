@@ -42,7 +42,7 @@ public class Match {
      * @param p1 the first player.
      * @param p2 the second player.
      */
-    public void fight(Player p1, Player p2) {
+    public Player fight(Player p1, Player p2) {
         Player attackingPlayer, defendingPlayer;
         if (p1.getHealth() <= p2.getHealth()) {
             attackingPlayer = p1;
@@ -60,8 +60,8 @@ public class Match {
             attackingPlayer = defendingPlayer;
             defendingPlayer = temp;
         }
-        System.out.println(defendingPlayer + " wins the match");
         logger.log(Level.INFO, defendingPlayer + " wins the match");
         logger.log(Level.FINE, attackingPlayer + " looses the match");
+        return defendingPlayer;
     }
 }
