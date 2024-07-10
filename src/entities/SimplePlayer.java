@@ -13,6 +13,7 @@ import java.util.logging.Logger;
  */
 public class SimplePlayer implements Player {
     private static final Logger logger = Logger.getLogger(SimplePlayer.class.getName());
+    private final String name;
     private int health;
     // Strength and attack are intentionally not final to allow modification in extended code.
     private int strength;
@@ -27,11 +28,12 @@ public class SimplePlayer implements Player {
      * @param attack   the attack of the player; must be positive.
      * @throws IllegalArgumentException if {@code health}, {@code strength}, or {@code attack} is not positive.
      */
-    public SimplePlayer(int health, int strength, int attack) {
+    public SimplePlayer(String name, int health, int strength, int attack) {
         if (health <= 0 || strength <= 0 || attack <= 0) {
             logger.log(Level.SEVERE, "Health: " + health + ", strength: " + strength + " and attack:" + attack + " cannot be < 0 ");
             throw new IllegalArgumentException("Invalid health, strength or attack");
         }
+        this.name = name;
         this.health = health;
         this.strength = strength;
         this.attack = attack;
@@ -40,14 +42,14 @@ public class SimplePlayer implements Player {
     @Override
     public int attack(AttackingStrategy attackingStrategy) {
         int attackPower = attackingStrategy.calculateDamage(this);
-        logger.log(Level.FINE, "Attack Power: " + attackPower);
+        logger.log(Level.FINE, this.getName() + " attacking with Power: " + attackPower);
         return attackPower;
     }
 
     @Override
     public void defend(int damage, DefendingStrategy defendingStrategy) {
         int damageTaken = defendingStrategy.effectiveDamage(damage, this);
-        logger.log(Level.FINE, "Effective Damage taken: " + damageTaken);
+        logger.log(Level.FINE, this.getName() + " effective Damage taken: " + damageTaken);
         this.setHealth(health - damageTaken);
     }
 
@@ -92,8 +94,15 @@ public class SimplePlayer implements Player {
         return attack;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        return "Player having current health: " + this.getHealth() + " ,attack: " + this.getAttack() + " ,strength: " + this.getStrength();
+        return "Player " + this.getName() +
+                " ,having current health: " + this.getHealth() +
+                " ,attack: " + this.getAttack() +
+                " ,strength: " + this.getStrength();
     }
 }
