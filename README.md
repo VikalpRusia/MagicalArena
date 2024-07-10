@@ -25,6 +25,10 @@ java -Djava.util.logging.config.file=../logging.properties MagicalArena.java
 
 Go to MagicalArena.java file and modify main accordingly
 
+### Changing logging properties
+
+Modify logging properties in logging.properties file
+
 ### Executing test cases
 
 Excluded Main class from code coverage
