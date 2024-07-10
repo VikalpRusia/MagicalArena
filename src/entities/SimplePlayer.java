@@ -68,12 +68,9 @@ public class SimplePlayer implements Player {
      * @param health the new health value; must not be negative.
      * @throws IllegalArgumentException if {@code health} is negative.
      */
-    public void setHealth(int health) {
+    private void setHealth(int health) {
         // Health can be 0 (player died) but cannot be negative
-        if (health < 0) {
-            throw new IllegalArgumentException("Invalid health");
-        }
-        this.health = health;
+        this.health = Math.max(health, 0);
     }
 
     /**
