@@ -1,72 +1,47 @@
 package entities;
 
+import utils.attack.AttackingStrategy;
+import utils.defend.DefendingStrategy;
+
 /**
- * Represents a player in the game with attributes for health, strength, and attack.
- * The player's health, strength, and attack must be positive values.
- * Health can be zero (indicating the player has died) but not negative.
+ * Represents a player in a game with attack and defense capabilities.
  */
-public class Player {
-
-    private int health;
-    // Strength and attack are intentionally not final to allow modification in extended code.
-    private int strength;
-    private int attack;
+public interface Player {
 
     /**
-     * Constructs a {@code Player} object with the specified {@code health}, {@code strength}, and {@code attack}.
+     * Performs an attack using the specified attacking strategy.
      *
-     * @param health the health of the player; must be positive.
-     * @param strength the strength of the player; must be positive.
-     * @param attack the attack of the player; must be positive.
-     * @throws IllegalArgumentException if {@code health}, {@code strength}, or {@code attack} is not positive.
+     * @param attackingStrategy the strategy used to calculate the attack damage.
+     * @return the damage inflicted on the opponent.
      */
-    public Player(int health, int strength, int attack) {
-        if (health <= 0 || strength <= 0 || attack<=0) {
-            throw new IllegalArgumentException("Invalid health, strength or attack");
-        }
-        this.health = health;
-        this.strength = strength;
-        this.attack = attack;
-    }
+    int attack(AttackingStrategy attackingStrategy);
 
     /**
-     * Returns the health of the player.
+     * Defends against incoming damage using the specified defending strategy.
      *
-     * @return the current health of the player.
+     * @param damage            the damage received from the attacker.
+     * @param defendingStrategy the strategy used to calculate the effective damage defended.
      */
-    public int getHealth() {
-        return health;
-    }
+    void defend(int damage, DefendingStrategy defendingStrategy);
 
     /**
-     * Sets the health of the player. Health can be zero (indicating the player has died) but not negative.
+     * Retrieves the current health of the player.
      *
-     * @param health the new health value; must not be negative.
-     * @throws IllegalArgumentException if {@code health} is negative.
+     * @return the current health value of the player.
      */
-    public void setHealth(int health) {
-        // Health can be 0 (player died) but cannot be negative
-        if (health < 0) {
-            throw new IllegalArgumentException("Invalid health");
-        }
-        this.health = health;
-    }
+    int getHealth();
 
     /**
-     * Returns the strength of the player.
+     * Retrieves the strength attribute of the player.
      *
-     * @return the strength of the player.
+     * @return the strength attribute of the player.
      */
-    public int getStrength() {
-        return strength;
-    }
+    int getStrength();
 
     /**
-     * Returns the attack of the player.
+     * Retrieves the attack attribute of the player.
      *
-     * @return the attack of the player.
+     * @return the attack attribute of the player.
      */
-    public int getAttack() {
-        return attack;
-    }
+    int getAttack();
 }
