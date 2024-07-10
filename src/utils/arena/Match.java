@@ -53,7 +53,9 @@ public class Match {
         }
 
         // Continue the fight until one player's health reaches 0
-        while (attackingPlayer.getHealth() != 0 && defendingPlayer.getHealth() != 0) {
+        // attacking and defending are swapped so last attacked player is the current attacking one
+        // therefore checking health of attacking player only
+        while (attackingPlayer.getHealth() != 0) {
             int attackedBy = attackingPlayer.attack(this.attackingStrategy);
             defendingPlayer.defend(attackedBy, this.defendingStrategy);
             Player temp = attackingPlayer;
